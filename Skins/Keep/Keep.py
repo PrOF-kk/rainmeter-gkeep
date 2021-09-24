@@ -15,7 +15,7 @@ NOTES_CACHE_FILE: str = "./cache"
 USERNAME: str = "YOUR.EMAIL@gmail.com"
 # Not the account's main password, but one generated specifically for this script.
 # In the future this could be made easier by prompting a Google sign-in
-APP_PASSOWRD: str = "APP PASSWORD, see https://support.google.com/accounts/answer/185833 "
+APP_PASSWORD: str = "APP PASSWORD, see https://support.google.com/accounts/answer/185833 "
 
 class State:
     '''Class representing data that should persist between script launches'''
@@ -38,7 +38,7 @@ def doFirstTimeSetup() -> State:
     state = State()
     state.keep = gkeepapi.Keep()
     state.username = USERNAME
-    loginKeep(state, APP_PASSOWRD)
+    loginKeep(state, APP_PASSWORD)
     state.masterToken = state.keep.getMasterToken()
     #saveScriptState(state)
     return state
