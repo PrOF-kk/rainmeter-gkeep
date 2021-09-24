@@ -98,5 +98,3 @@ elif func == "title":
     print(note.title)
 else:
     print("Unimplemented command, exiting")
-
-print("done")
