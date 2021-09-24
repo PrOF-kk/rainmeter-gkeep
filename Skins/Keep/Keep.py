@@ -14,7 +14,7 @@ NOTES_CACHE_FILE: str = "./cache"
 
 USERNAME: str = "YOUR.EMAIL@gmail.com"
 # Not the account's main password, but one generated specifically for this script.
-# In te future this could be made easier by prompting a Google sign-in
+# In the future this could be made easier by prompting a Google sign-in
 APP_PASSOWRD: str = "APP PASSWORD, see https://support.google.com/accounts/answer/185833 "
 
 class State:

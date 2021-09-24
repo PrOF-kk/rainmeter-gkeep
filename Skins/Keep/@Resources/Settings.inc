@@ -1,0 +1,2 @@
+[Variables]
+NOTE_ID=YOUR_NOTE_ID
