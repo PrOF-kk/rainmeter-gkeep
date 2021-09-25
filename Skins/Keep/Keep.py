@@ -16,8 +16,9 @@ NOTES_CACHE_FILE: str = "./cache"
 config = configparser.ConfigParser()
 config.read("@Resources/Settings.inc")
 USER_EMAIL: str = config["Variables"]["USER_EMAIL"]
+NOTE_ID: str = config["Variables"]["NOTE_ID"]
 # Not the account's main password, but one generated specifically for this script.
-# In the future this could be made easier by prompting a Google sign-in
+#TODO this is only needed for the first login, popup a window for setup the first time
 APP_PASSWORD: str = "APP PASSWORD, see https://support.google.com/accounts/answer/185833 "
 
 class State:
@@ -92,12 +93,12 @@ func = sys.argv[1]
 state = initialize()
 
 if func == "get":
-    note = getNote(state, sys.argv[2])
+    note = getNote(state, NOTE_ID)
     print(note.text)
 elif func == "cache":
     saveNoteCache(state.keep)
 elif func == "title":
-    note = getNote(state, sys.argv[2])
+    note = getNote(state, NOTE_ID)
     print(note.title)
 else:
     print("Unimplemented command, exiting")
