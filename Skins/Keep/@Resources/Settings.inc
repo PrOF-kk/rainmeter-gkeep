@@ -1,3 +1,4 @@
 [Variables]
+USER_EMAIL=YOUR_EMAIL
 NOTE_ID=YOUR_NOTE_ID
 OUTPUT_FILE=output.txt

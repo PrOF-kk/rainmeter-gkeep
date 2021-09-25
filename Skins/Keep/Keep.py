@@ -5,6 +5,7 @@ import gkeepapi
 import json
 import sys
 import os
+import configparser
 
 from gkeepapi.node import TopLevelNode
 
@@ -12,7 +13,8 @@ from gkeepapi.node import TopLevelNode
 SCRIPT_STATE_FILE: str = "./script_state"
 NOTES_CACHE_FILE: str = "./cache"
 
-USERNAME: str = "YOUR.EMAIL@gmail.com"
+config = configparser.ConfigParser().read("@Resources/Settings.inc")
+USER_EMAIL: str = config["Variables"]["USER_EMAIL"]
 # Not the account's main password, but one generated specifically for this script.
 # In the future this could be made easier by prompting a Google sign-in
 APP_PASSWORD: str = "APP PASSWORD, see https://support.google.com/accounts/answer/185833 "
@@ -37,7 +39,7 @@ def initialize() -> State:
 def doFirstTimeSetup() -> State:
     state = State()
     state.keep = gkeepapi.Keep()
-    state.username = USERNAME
+    state.username = USER_EMAIL
     loginKeep(state, APP_PASSWORD)
     state.masterToken = state.keep.getMasterToken()
     #saveScriptState(state)
