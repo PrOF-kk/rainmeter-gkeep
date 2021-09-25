@@ -17,9 +17,25 @@ config = configparser.ConfigParser()
 config.read("@Resources/Settings.inc")
 USER_EMAIL: str = config["Variables"]["USER_EMAIL"]
 NOTE_ID: str = config["Variables"]["NOTE_ID"]
+
 # Not the account's main password, but one generated specifically for this script.
 #TODO this is only needed for the first login, popup a window for setup the first time
 APP_PASSWORD: str = "APP PASSWORD, see https://support.google.com/accounts/answer/185833 "
+
+def main():
+    func = sys.argv[1]
+    state = initialize()
+
+    if func == "get":
+        note = getNote(state, NOTE_ID)
+        print(note.text)
+    elif func == "cache":
+        saveNoteCache(state.keep)
+    elif func == "title":
+        note = getNote(state, NOTE_ID)
+        print(note.title)
+    else:
+        print("Unimplemented command, exiting")
 
 class State:
     '''Class representing data that should persist between script launches'''
@@ -88,17 +104,5 @@ def saveNoteCache(keep: gkeepapi.Keep):
     with open(NOTES_CACHE_FILE, 'w+') as cache:
         json.dump(keep.dump(), cache)
 
-# main
-func = sys.argv[1]
-state = initialize()
-
-if func == "get":
-    note = getNote(state, NOTE_ID)
-    print(note.text)
-elif func == "cache":
-    saveNoteCache(state.keep)
-elif func == "title":
-    note = getNote(state, NOTE_ID)
-    print(note.title)
-else:
-    print("Unimplemented command, exiting")
+if __name__ == "__main__":
+    main()
