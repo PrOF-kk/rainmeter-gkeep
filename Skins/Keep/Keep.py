@@ -13,7 +13,8 @@ from gkeepapi.node import TopLevelNode
 SCRIPT_STATE_FILE: str = "./script_state"
 NOTES_CACHE_FILE: str = "./cache"
 
-config = configparser.ConfigParser().read("@Resources/Settings.inc")
+config = configparser.ConfigParser()
+config.read("@Resources/Settings.inc")
 USER_EMAIL: str = config["Variables"]["USER_EMAIL"]
 # Not the account's main password, but one generated specifically for this script.
 # In the future this could be made easier by prompting a Google sign-in
