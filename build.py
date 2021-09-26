@@ -13,6 +13,8 @@ print(shutil.copytree(SOURCE, INSTALL_LOCATION, dirs_exist_ok=True))
 
 # Overwrite placeholder variables with debug ones
 config = configparser.ConfigParser()
+# Preserve ini case
+config.optionxform = str
 config.read("debug_settings.ini")
 with open(INSTALL_LOCATION + "@Resources\\Settings.inc", "w") as configfile:
-    config.write(configfile)
+    config.write(configfile, space_around_delimiters=False)
