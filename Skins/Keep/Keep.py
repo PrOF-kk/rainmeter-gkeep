@@ -16,6 +16,7 @@ config = configparser.ConfigParser()
 config.read("@Resources/Settings.inc")
 USER_EMAIL: str = config["Variables"]["USER_EMAIL"]
 NOTE_ID: str = config["Variables"]["NOTE_ID"]
+LOCAL_NOTE_FILE = config["Variables"]["OUTPUT_FILE"]
 
 # Not the account's main password, but one generated specifically for this script.
 #TODO this is only needed for the first login, popup a window for setup the first time
@@ -32,9 +33,17 @@ def main():
     if func == "get":
         note = keep.get(NOTE_ID)
         print(note.text)
+
+    elif func == "upload":
+        note = keep.get(NOTE_ID)
+        with open(LOCAL_NOTE_FILE) as f:
+            note.text = f.read()
+        keep.sync()
+
     elif func == "title":
         note = keep.get(NOTE_ID)
         print(note.title)
+
     else:
         print("Unimplemented command.")
     
