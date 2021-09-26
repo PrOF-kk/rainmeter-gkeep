@@ -27,7 +27,7 @@ def main():
     
     # if first time:
     keep = gkeepapi.Keep()
-    keep.login(USER_EMAIL, APP_PASSWORD, loadCache())
+    keep.login(USER_EMAIL, APP_PASSWORD, loadCache(keep))
     #TODO else load master token and resume
 
     if func == "get":
@@ -47,7 +47,7 @@ def main():
     else:
         print("Unimplemented command.")
     
-    saveCache()
+    saveCache(keep)
 
 def loadCache(keep: gkeepapi.Keep) -> dict:
     """Returns a dict representing the note cache"""
