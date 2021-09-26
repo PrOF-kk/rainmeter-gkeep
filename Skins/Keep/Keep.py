@@ -49,16 +49,16 @@ def main():
     
     saveCache(keep)
 
-def loadCache(keep: gkeepapi.Keep) -> dict:
-    """Returns a dict representing the note cache"""
+def loadCache(keep: gkeepapi.Keep):
+    """Returns a dict representing the note cache, or None if file does not exist or other error"""
 
     if not os.path.exists(NOTES_CACHE_FILE):
-        return {}
+        return None
     try:
         with open(NOTES_CACHE_FILE, "r") as f:
             return json.load(f)
     except:
-        return {}
+        return None
 
 def saveCache(keep: gkeepapi.Keep) -> None:
     """Writes note cache to disk"""
