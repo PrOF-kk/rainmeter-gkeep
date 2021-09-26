@@ -20,7 +20,7 @@ LOCAL_NOTE_FILE = config["Variables"]["OUTPUT_FILE"]
 
 # Not the account's main password, but one generated specifically for this script.
 #TODO this is only needed for the first login, popup a window for setup the first time
-APP_PASSWORD: str = "APP PASSWORD, see https://support.google.com/accounts/answer/185833 "
+APP_PASSWORD: str = config["Variables"]["APP_PASSWORD"]
 
 def main():
     func = sys.argv[1]
