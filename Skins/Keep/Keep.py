@@ -31,8 +31,10 @@ def main():
             keep.resume(USER_EMAIL, master_token, loadCache())
         except gkeepapi.exception.LoginException:
             keep.login(USER_EMAIL, APP_PASSWORD, loadCache())
+            keyring.set_password("rainmeter-gkeep", USER_EMAIL, keep.getMasterToken())
     else:
         keep.login(USER_EMAIL, APP_PASSWORD, loadCache())
+        keyring.set_password("rainmeter-gkeep", USER_EMAIL, keep.getMasterToken())
         #TODO else load master token and resume
 
     if func == "get":
