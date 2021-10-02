@@ -6,8 +6,7 @@ import json
 import sys
 import os
 import configparser
-
-from gkeepapi.node import TopLevelNode
+import keyring
 
 # Constants
 NOTES_CACHE_FILE: str = "./cache"
@@ -25,10 +24,16 @@ APP_PASSWORD: str = config["Variables"]["APP_PASSWORD"]
 def main():
     func = sys.argv[1]
     
-    # if first time:
     keep = gkeepapi.Keep()
-    keep.login(USER_EMAIL, APP_PASSWORD, loadCache(keep))
-    #TODO else load master token and resume
+    # if not first time:
+    if master_token := keyring.get_password("rainmeter-gkeep", USER_EMAIL) is not None:
+        try:
+            keep.resume(USER_EMAIL, master_token, loadCache(keep))
+        except gkeepapi.exception.LoginException:
+            keep.login(USER_EMAIL, APP_PASSWORD, loadCache(keep))
+    else:
+        keep.login(USER_EMAIL, APP_PASSWORD, loadCache(keep))
+        #TODO else load master token and resume
 
     if func == "get":
         note = keep.get(NOTE_ID)
