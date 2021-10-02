@@ -28,11 +28,11 @@ def main():
     # if not first time:
     if master_token := keyring.get_password("rainmeter-gkeep", USER_EMAIL) is not None:
         try:
-            keep.resume(USER_EMAIL, master_token, loadCache(keep))
+            keep.resume(USER_EMAIL, master_token, loadCache())
         except gkeepapi.exception.LoginException:
-            keep.login(USER_EMAIL, APP_PASSWORD, loadCache(keep))
+            keep.login(USER_EMAIL, APP_PASSWORD, loadCache())
     else:
-        keep.login(USER_EMAIL, APP_PASSWORD, loadCache(keep))
+        keep.login(USER_EMAIL, APP_PASSWORD, loadCache())
         #TODO else load master token and resume
 
     if func == "get":
@@ -54,7 +54,7 @@ def main():
     
     saveCache(keep)
 
-def loadCache(keep: gkeepapi.Keep):
+def loadCache():
     """Returns a dict representing the note cache, or None if file does not exist or other error"""
 
     if not os.path.exists(NOTES_CACHE_FILE):
