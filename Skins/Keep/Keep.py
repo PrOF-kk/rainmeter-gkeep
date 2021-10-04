@@ -25,17 +25,18 @@ def main():
     func = sys.argv[1]
     
     keep = gkeepapi.Keep()
+    master_token = keyring.get_password("rainmeter-gkeep", USER_EMAIL)
     # if not first time:
-    if master_token := keyring.get_password("rainmeter-gkeep", USER_EMAIL) is not None:
+    if master_token is not None:
         try:
             keep.resume(USER_EMAIL, master_token, loadCache())
+            keyring.get_password("rainmeter-gkeep", USER_EMAIL)
         except gkeepapi.exception.LoginException:
             keep.login(USER_EMAIL, APP_PASSWORD, loadCache())
             keyring.set_password("rainmeter-gkeep", USER_EMAIL, keep.getMasterToken())
     else:
         keep.login(USER_EMAIL, APP_PASSWORD, loadCache())
         keyring.set_password("rainmeter-gkeep", USER_EMAIL, keep.getMasterToken())
-        #TODO else load master token and resume
 
     if func == "get":
         note = keep.get(NOTE_ID)
