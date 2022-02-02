@@ -1,11 +1,11 @@
 # Copyright (c) 2021 Valerio Colella
 # SPDX-License-Identifier: MIT
 
-import gkeepapi
 import json
 import sys
 import os
 import configparser
+import gkeepapi
 import keyring
 
 # Constants
