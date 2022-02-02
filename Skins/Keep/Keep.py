@@ -23,7 +23,7 @@ APP_PASSWORD: str = config["Variables"]["APP_PASSWORD"]
 
 def main():
     func = sys.argv[1]
-    
+
     keep = gkeepapi.Keep()
     master_token = keyring.get_password("rainmeter-gkeep", USER_EMAIL)
     # if not first time:
@@ -54,7 +54,7 @@ def main():
 
     else:
         print("Unimplemented command.")
-    
+
     saveCache(keep)
 
 def loadCache():
