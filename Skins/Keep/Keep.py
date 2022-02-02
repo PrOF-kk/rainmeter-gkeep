@@ -29,13 +29,13 @@ def main():
     # if not first time:
     if master_token is not None:
         try:
-            keep.resume(USER_EMAIL, master_token, loadCache())
+            keep.resume(USER_EMAIL, master_token, load_cache())
             keyring.get_password("rainmeter-gkeep", USER_EMAIL)
         except gkeepapi.exception.LoginException:
-            keep.login(USER_EMAIL, APP_PASSWORD, loadCache())
+            keep.login(USER_EMAIL, APP_PASSWORD, load_cache())
             keyring.set_password("rainmeter-gkeep", USER_EMAIL, keep.getMasterToken())
     else:
-        keep.login(USER_EMAIL, APP_PASSWORD, loadCache())
+        keep.login(USER_EMAIL, APP_PASSWORD, load_cache())
         keyring.set_password("rainmeter-gkeep", USER_EMAIL, keep.getMasterToken())
 
     if func == "get":
@@ -55,9 +55,9 @@ def main():
     else:
         print("Unimplemented command.")
 
-    saveCache(keep)
+    save_cache(keep)
 
-def loadCache():
+def load_cache():
     """Returns a dict representing the note cache, or None if file does not exist or other error"""
 
     if not os.path.exists(NOTES_CACHE_FILE):
@@ -68,7 +68,7 @@ def loadCache():
     except:
         return None
 
-def saveCache(keep: gkeepapi.Keep) -> None:
+def save_cache(keep: gkeepapi.Keep) -> None:
     """Writes note cache to disk"""
 
     cache = keep.dump()
