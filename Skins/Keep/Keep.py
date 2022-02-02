@@ -44,7 +44,7 @@ def main():
 
     elif func == "upload":
         note = keep.get(NOTE_ID)
-        with open(LOCAL_NOTE_FILE) as f:
+        with open(LOCAL_NOTE_FILE, encoding="utf-8") as f:
             note.text = f.read()
         keep.sync()
 
@@ -63,7 +63,7 @@ def loadCache():
     if not os.path.exists(NOTES_CACHE_FILE):
         return None
     try:
-        with open(NOTES_CACHE_FILE, "r") as f:
+        with open(NOTES_CACHE_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
     except:
         return None
@@ -72,7 +72,7 @@ def saveCache(keep: gkeepapi.Keep) -> None:
     """Writes note cache to disk"""
 
     cache = keep.dump()
-    with open(NOTES_CACHE_FILE, "w") as f:
+    with open(NOTES_CACHE_FILE, "w", encoding="utf-8") as f:
         json.dump(cache, f)
 
 if __name__ == "__main__":
