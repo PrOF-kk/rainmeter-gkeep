@@ -18,8 +18,9 @@ NOTE_ID: str = config["Variables"]["NOTE_ID"]
 LOCAL_NOTE_FILE = config["Variables"]["OUTPUT_FILE"]
 
 # Not the account's main password, but one generated specifically for this script.
-#TODO this is only needed for the first login, popup a window for setup the first time
+# TODO this is only needed for the first login, popup a window for setup the first time
 APP_PASSWORD: str = config["Variables"]["APP_PASSWORD"]
+
 
 def main():
     func = sys.argv[1]
@@ -57,6 +58,7 @@ def main():
 
     save_cache(keep)
 
+
 def load_cache():
     """Returns a dict representing the note cache, or None if file does not exist or other error"""
 
@@ -68,12 +70,14 @@ def load_cache():
     except:
         return None
 
+
 def save_cache(keep: gkeepapi.Keep) -> None:
     """Writes note cache to disk"""
 
     cache = keep.dump()
     with open(NOTES_CACHE_FILE, "w", encoding="utf-8") as f:
         json.dump(cache, f)
+
 
 if __name__ == "__main__":
     main()
