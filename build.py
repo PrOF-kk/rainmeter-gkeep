@@ -16,5 +16,5 @@ config = configparser.ConfigParser()
 # Preserve ini case
 config.optionxform = str
 config.read("debug_settings.ini")
-with open(INSTALL_LOCATION + "@Resources\\Settings.inc", "w") as configfile:
+with open(INSTALL_LOCATION + "@Resources\\Settings.inc", "w", encoding="utf-8") as configfile:
     config.write(configfile, space_around_delimiters=False)
