@@ -67,7 +67,7 @@ def load_cache():
     try:
         with open(NOTES_CACHE_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
-    except:
+    except Exception:
         return None
 
 
