@@ -10,9 +10,10 @@ import keyring
 
 # Constants
 NOTES_CACHE_FILE: str = "./cache"
+SETTINGS_FILE_PATH = "@Resources/Settings.inc"
 
 config = configparser.ConfigParser()
-config.read("@Resources/Settings.inc")
+config.read(SETTINGS_FILE_PATH)
 USER_EMAIL: str = config["Variables"]["USER_EMAIL"]
 NOTE_ID: str = config["Variables"]["NOTE_ID"]
 LOCAL_NOTE_FILE = config["Variables"]["OUTPUT_FILE"]
@@ -77,6 +78,15 @@ def save_cache(keep: gkeepapi.Keep) -> None:
     cache = keep.dump()
     with open(NOTES_CACHE_FILE, "w", encoding="utf-8") as f:
         json.dump(cache, f)
+
+
+def config_write() -> None:
+    config["Variables"]["USER_EMAIL"] = USER_EMAIL
+    config["Variables"]["NOTE_ID"] = NOTE_ID
+    config["Variables"]["OUPUT_FILE"] = LOCAL_NOTE_FILE
+    config["Variables"]["APP_PASSWORD"] = APP_PASSWORD
+    with open(SETTINGS_FILE_PATH, "w", encoding="utf-8") as configfile:
+        config.write(configfile, space_around_delimiters=False)
 
 
 if __name__ == "__main__":
