@@ -20,6 +20,7 @@ LOCAL_NOTE_FILE = config["Variables"]["OUTPUT_FILE"]
 
 # Not the account's main password, but one generated specifically for this script.
 # TODO this is only needed for the first login, popup a window for setup the first time
+# then we save the master token in the keyring
 APP_PASSWORD: str = config["Variables"]["APP_PASSWORD"]
 
 
@@ -37,7 +38,9 @@ def main():
             keep.login(USER_EMAIL, APP_PASSWORD, load_cache())
             keyring.set_password("rainmeter-gkeep", USER_EMAIL, keep.getMasterToken())
     else:
-        keep.login(USER_EMAIL, APP_PASSWORD, load_cache())
+        gui_login(keep) or exit()
+        # keep.login(USER_EMAIL, APP_PASSWORD, load_cache())
+        # TODO save settings from gui
         keyring.set_password("rainmeter-gkeep", USER_EMAIL, keep.getMasterToken())
 
     if func == "get":
@@ -87,6 +90,49 @@ def config_write() -> None:
     config["Variables"]["APP_PASSWORD"] = APP_PASSWORD
     with open(SETTINGS_FILE_PATH, "w", encoding="utf-8") as configfile:
         config.write(configfile, space_around_delimiters=False)
+
+
+# --- Gui --- #
+def gui_login(keep: gkeepapi.Keep) -> bool:
+    import tkinter as tk
+
+    result = False
+    padx = 10
+    pady = 0
+
+    def try_login(event=None):
+        nonlocal result
+        try:
+            keep.login(email.get(), pw.get())
+        except gkeepapi.exception.LoginException as e:
+            error_status.configure(text=f"Could not login: {e}")
+        else:
+            result = True
+            window.destroy()
+
+    window = tk.Tk()
+    window.geometry("300x175")
+    window.title("Login")
+
+    tk.Label(text="Rainmeter-gkeep").pack(anchor="w", padx=padx, pady=pady)
+
+    tk.Label(text="E-mail").pack(anchor="w", padx=padx, pady=pady)
+    email = tk.Entry()
+    email.pack(fill="x", padx=10)
+
+    tk.Label(text="Password").pack(anchor="w", padx=padx, pady=pady)
+    pw = tk.Entry(show='•')
+    pw.pack(fill="x", padx=padx, pady=pady)
+    pw.bind("<Return>", try_login)
+
+    error_status = tk.Label(text="", fg="#cc0000")
+    error_status.pack(anchor="w", padx=padx, pady=pady)
+
+    lbtn = tk.Button(text="Login", command=try_login)
+    lbtn.pack()
+
+    window.mainloop()
+    return result
 
 
 if __name__ == "__main__":
