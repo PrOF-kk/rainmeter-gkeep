@@ -39,8 +39,7 @@ def main():
             keyring.set_password("rainmeter-gkeep", USER_EMAIL, keep.getMasterToken())
     else:
         gui_login(keep) or exit()
-        # keep.login(USER_EMAIL, APP_PASSWORD, load_cache())
-        # TODO save settings from gui
+        config_write()
         keyring.set_password("rainmeter-gkeep", USER_EMAIL, keep.getMasterToken())
 
     if func == "get":
@@ -102,11 +101,14 @@ def gui_login(keep: gkeepapi.Keep) -> bool:
 
     def try_login(event=None):
         nonlocal result
+        global USER_EMAIL, APP_PASSWORD
         try:
             keep.login(email.get(), pw.get())
         except gkeepapi.exception.LoginException as e:
             error_status.configure(text=f"Could not login: {repr(e)}")
         else:
+            USER_EMAIL = email.get()
+            APP_PASSWORD = pw.get()
             result = True
             window.destroy()
 
