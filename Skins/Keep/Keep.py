@@ -43,6 +43,9 @@ def main():
         keyring.set_password("rainmeter-gkeep", USER_EMAIL, keep.getMasterToken())
 
     if func == "get":
+        if NOTE_ID == "YOUR_NOTE_ID":
+            print("Set the note id in the Settings.inc file")
+            exit()
         note = keep.get(NOTE_ID)
         print(note.text)
 
