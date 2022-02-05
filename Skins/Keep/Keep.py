@@ -105,7 +105,7 @@ def gui_login(keep: gkeepapi.Keep) -> bool:
         try:
             keep.login(email.get(), pw.get())
         except gkeepapi.exception.LoginException as e:
-            error_status.configure(text=f"Could not login: {e}")
+            error_status.configure(text=f"Could not login: {repr(e)}")
         else:
             result = True
             window.destroy()
