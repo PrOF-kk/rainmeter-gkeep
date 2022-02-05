@@ -30,7 +30,7 @@ def main():
     keep = gkeepapi.Keep()
     master_token = keyring.get_password("rainmeter-gkeep", USER_EMAIL)
     # if not first time:
-    if master_token is not None and False:
+    if master_token is not None:
         try:
             keep.resume(USER_EMAIL, master_token, load_cache())
             keyring.get_password("rainmeter-gkeep", USER_EMAIL)
