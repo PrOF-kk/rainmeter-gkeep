@@ -124,10 +124,12 @@ def gui_login(keep: gkeepapi.Keep) -> bool:
     pw.pack(fill="x", padx=padx, pady=pady)
     pw.bind("<Return>", try_login)
 
-    pwinfo = tk.Label(text="If your account has 2-Factor-Authentication enabled, you'll need an App Password for Rainmeter-Gkeep")
+    pwinfo1 = tk.Label(text="If your account has 2-Factor-Authentication enabled, you'll need an App Password for Rainmeter-Gkeep.")
+    pwinfo2 = tk.Label(text="Click here to learn more.", fg="#0077aa")
     # Avoid requiring the webbrowser library
-    pwinfo.bind("<Button-1>", lambda x: os.system("start https://support.google.com/accounts/answer/185833"))
-    pwinfo.pack(anchor="w", padx=padx, pady=pady)
+    pwinfo2.bind("<Button-1>", lambda x: os.system("start https://support.google.com/accounts/answer/185833"))
+    pwinfo1.pack(anchor="w", padx=padx, pady=pady)
+    pwinfo2.pack(anchor="w", padx=padx, pady=pady)
 
     error_status = tk.Label(text="", fg="#cc0000")
     error_status.pack(anchor="w", padx=padx, pady=pady)
