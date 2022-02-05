@@ -1,10 +1,11 @@
 # Rainmeter-GKeep
+<img align="right" width="10%" src="res/graphics/rainmeter-skeep-icon.svg" />
 
-Rainmeter-GKeep is a proof-of-concept Rainmeter meter to display a note from Google Keep on the desktop
+Rainmeter-GKeep is a Rainmeter meter which, alongside a note-taking skin of your choosing, allows to display and update a Google Keep note directly from your desktop
 
 ## Prerequisites
 
-Python 3.9 and the [gkeepapi](https://github.com/kiwiz/gkeepapi) library are required
+Python ≥3.9 and the [gkeepapi](https://github.com/kiwiz/gkeepapi) library are required
 
 ```batch
 pip install gkeepapi
@@ -13,7 +14,7 @@ pip install gkeepapi
 ## Installation
 
 1. Either clone the repository or [download it as ZIP](https://github.com/PrOF-kk/rainmeter-gkeep/archive/refs/heads/master.zip)  
-2. Copy everything to your Rainmeter Skin installation folder, usually `C:\Users\%username%\Documents\Rainmeter\Skins`
+2. Copy the `Skins\Keep` folder to your Rainmeter Skin installation folder, usually `C:\Users\%username%\Documents\Rainmeter\Skins`
 3. Modify the `Keep\@Resources\Settings.inc` file:
    * `USER_EMAIL`: Your e-mail (example@gmail.com)
    * `APP_PASSWORD`: If you have enabled 2-factor-authentication for your Google account you'll need to create an [App Password](https://support.google.com/accounts/answer/185833), otherwise you can use your normal password
@@ -22,9 +23,6 @@ pip install gkeepapi
 5. To use rainmeter-skeep with another note-taking skin, set `OUTPUT_FILE` to the relative path to your skin's note file.  
    For example, for the [Paper::Notes by Haitime](https://www.deviantart.com/haitime/art/Paper-Notes-399129789) skin you'd set it to `../Paper/Notes/Note 1/my.notes`
 6. To disable the ugly default black window, set `HIDE_OUTPUT_VIEWER` to 1
-
-## Contributing
-Pull requests are welcome
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
