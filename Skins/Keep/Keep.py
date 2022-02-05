@@ -111,7 +111,7 @@ def gui_login(keep: gkeepapi.Keep) -> bool:
             window.destroy()
 
     window = tk.Tk()
-    window.geometry("300x175")
+    window.minsize(300, 200)
     window.title("Login")
 
     tk.Label(text="Rainmeter-gkeep").pack(anchor="w", padx=padx, pady=pady)
@@ -124,6 +124,11 @@ def gui_login(keep: gkeepapi.Keep) -> bool:
     pw = tk.Entry(show='•')
     pw.pack(fill="x", padx=padx, pady=pady)
     pw.bind("<Return>", try_login)
+
+    pwinfo = tk.Label(text="If your account has 2-Factor-Authentication enabled, you'll need an App Password for Rainmeter-Gkeep")
+    # Avoid requiring the webbrowser library
+    pwinfo.bind("<Button-1>", lambda x: os.system("start https://support.google.com/accounts/answer/185833"))
+    pwinfo.pack(anchor="w", padx=padx, pady=pady)
 
     error_status = tk.Label(text="", fg="#cc0000")
     error_status.pack(anchor="w", padx=padx, pady=pady)
