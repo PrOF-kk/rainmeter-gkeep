@@ -30,7 +30,7 @@ def main():
     keep = gkeepapi.Keep()
     master_token = keyring.get_password("rainmeter-gkeep", USER_EMAIL)
     # if not first time:
-    if master_token is not None:
+    if master_token is not None and False:
         try:
             keep.resume(USER_EMAIL, master_token, load_cache())
             keyring.get_password("rainmeter-gkeep", USER_EMAIL)
@@ -112,6 +112,7 @@ def gui_login(keep: gkeepapi.Keep) -> bool:
 
     window = tk.Tk()
     window.minsize(300, 200)
+    window.iconphoto(True, tk.PhotoImage(file="@Resources/rainmeter-gkeep-icon-64.png"))
     window.title("Login")
 
     tk.Label(text="Rainmeter-gkeep").pack(anchor="w", padx=padx, pady=pady)
