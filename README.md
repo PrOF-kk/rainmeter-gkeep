@@ -1,5 +1,5 @@
 # Rainmeter-GKeep
-<img align="right" width="10%" src="res/graphics/rainmeter-skeep-icon.svg" />
+<img align="right" width="10%" src="res/graphics/rainmeter-gkeep-icon.svg" />
 
 Rainmeter-GKeep is a Rainmeter meter which, alongside a note-taking skin of your choosing, allows to display and update a Google Keep note directly from your desktop
 
