@@ -114,6 +114,7 @@ def gui_login(keep: gkeepapi.Keep) -> bool:
     window.minsize(300, 200)
     window.iconphoto(True, tk.PhotoImage(file="@Resources/rainmeter-gkeep-icon-64.png"))
     window.title("Login")
+    window.resizable(0, 0)
 
     tk.Label(text="Rainmeter-gkeep").pack(anchor="w", padx=padx, pady=pady)
 
