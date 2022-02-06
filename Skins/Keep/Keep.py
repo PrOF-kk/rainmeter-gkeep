@@ -44,8 +44,8 @@ def main():
 
     if func == "get":
         if NOTE_ID == "YOUR_NOTE_ID":
-            print("Set the note id in the Settings.inc file")
-            exit()
+            gui_notechoice(keep) or exit()
+            config_write()
         note = keep.get(NOTE_ID)
         print(note.text)
 
@@ -143,6 +143,45 @@ def gui_login(keep: gkeepapi.Keep) -> bool:
     lbtn.pack()
 
     window.mainloop()
+    return result
+
+
+def gui_notechoice(keep: gkeepapi.Keep) -> bool:
+    import tkinter as tk
+    import gkeepapi.node
+
+    def select(event=None):
+        nonlocal result
+        global NOTE_ID
+        # curselection returns a tuple (start, end)
+        NOTE_ID = notes[notebox.curselection()[0]].id
+        result = True
+        root.destroy()
+
+    result = False
+
+    root = tk.Tk()
+    root.geometry("600x300")
+    root.iconphoto(True, tk.PhotoImage(file="@Resources/rainmeter-gkeep-icon-64.png"))
+    root.title("Choose note")
+
+    window = tk.Frame(root)
+    window.rowconfigure(0, weight=4)
+    window.rowconfigure(1, weight=1)
+    window.columnconfigure(0, weight=1)
+
+    notes: list[gkeepapi.node.TopLevelNode] = keep.all()
+    notestrings = tuple(el.title if el.title != "" else el.text for el in notes)
+    notebox = tk.Listbox(window, listvariable=tk.StringVar(value=notestrings))
+    notebox.grid(row=0, column=0, sticky="news")
+    notebox.select_set(0)
+
+    selectbtn = tk.Button(window, text="Select", command=select)
+    selectbtn.grid(row=1, column=0)
+
+    window.pack(fill="both", expand=True, padx=16, pady=9)
+    root.mainloop()
+
     return result
 
 
