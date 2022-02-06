@@ -59,6 +59,10 @@ def main():
         note = keep.get(NOTE_ID)
         print(note.title)
 
+    elif func == "notechoice":
+        gui_notechoice(keep) or exit()
+        config_write()
+
     else:
         print("Unimplemented command.")
 
