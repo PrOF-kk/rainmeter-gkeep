@@ -5,10 +5,13 @@ Rainmeter-GKeep is a Rainmeter meter which, alongside a note-taking skin of your
 
 ## Prerequisites
 
-Python ≥3.9 and the [gkeepapi](https://github.com/kiwiz/gkeepapi) library are required
+* Python ≥3.9
+* [Gkeepapi](https://github.com/kiwiz/gkeepapi)
+* [Keyring](https://pypi.org/project/keyring/)
 
 ```batch
 pip install gkeepapi
+pip install keyring
 ```
 
 ## Installation
