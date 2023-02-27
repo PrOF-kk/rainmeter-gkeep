@@ -5,8 +5,13 @@ import json
 import sys
 import os
 import configparser
-import gkeepapi
-import keyring
+
+try:
+    import gkeepapi
+    import keyring
+except ImportError as e:
+    print(f"Error: could not find the {e.name} module, check the Rainmeter-GKeep requirements")
+    sys.exit(1)
 
 # Constants
 NOTES_CACHE_FILE: str = "./cache"
