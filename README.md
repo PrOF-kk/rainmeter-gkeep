@@ -27,5 +27,11 @@ pip install keyring
    For example, for the [Paper::Notes by Haitime](https://www.deviantart.com/haitime/art/Paper-Notes-399129789) skin you'd set it to `../Paper/Notes/Note 1/my.notes`
 6. To disable the ugly default black window, set `HIDE_OUTPUT_VIEWER` to 1
 
+## Contributing
+1. Clone the repository
+2. Insert your credentials in the `debug_settings.ini` file (ignored by Git)
+3. To test your changes, run `build.py`
+4. There's a shortcut (.lnk) file to quickly open the Installed Skins folder
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
